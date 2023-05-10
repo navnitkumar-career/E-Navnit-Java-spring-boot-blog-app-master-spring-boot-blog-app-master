@@ -1,5 +1,6 @@
 package gt.app.modules.file;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.util.MimeTypeUtils;
 
@@ -36,7 +37,7 @@ public final class FileDownloadUtil {
             //response.setContentLength((int) file.length());
 
             // This will download the file to the user's computer
-            response.setHeader("Content-Disposition", "attachment; filename=" + originalFileName);
+            response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + originalFileName));
 
             in.transferTo(response.getOutputStream());
 
