@@ -2,6 +2,7 @@ package gt.app.modules.file;
 
 import gt.app.config.AppProperties;
 import gt.app.domain.ReceivedFile;
+import io.github.pixee.security.Filenames;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class FileService {
 
         try {
 
-            String fileIdentifier = getCleanedFileName(file.getOriginalFilename());
+            String fileIdentifier = getCleanedFileName(Filenames.toSimpleFileName(file.getOriginalFilename()));
 
             Path targetPath = getStoredFilePath(fileGroup, fileIdentifier);
 
