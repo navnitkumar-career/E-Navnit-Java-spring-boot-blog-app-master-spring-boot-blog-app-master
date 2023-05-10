@@ -7,6 +7,7 @@ import gt.app.modules.note.dto.NoteCreateDto;
 import gt.app.modules.note.dto.NoteEditDto;
 import gt.app.modules.note.dto.NoteMapper;
 import gt.app.modules.note.dto.NoteReadDto;
+import io.github.pixee.security.Filenames;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ public class NoteService {
             }
 
             String fileId = fileService.store(FILE_GROUP, mpf);
-            files.add(new ReceivedFile(FILE_GROUP, mpf.getOriginalFilename(), fileId));
+            files.add(new ReceivedFile(FILE_GROUP, Filenames.toSimpleFileName(mpf.getOriginalFilename()), fileId));
         }
 
         Note note = noteMapper.createToEntity(dto);
